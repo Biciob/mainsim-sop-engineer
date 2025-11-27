@@ -46,7 +46,7 @@ Genera sempre una singola SOP completa nel formato markdown.
 
 export const generateSopContent = async (request: SopGenerationRequest): Promise<string> => {
   try {
-    const apiKey = process.env.API_KEY;
+    const apiKey = import.meta.env.VITE_API_KEY;
     if (!apiKey) {
       throw new Error("API Key not found in environment variables");
     }
