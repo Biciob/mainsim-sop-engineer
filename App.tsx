@@ -110,10 +110,10 @@ export default function App() {
   const assetSops = history.filter(sop => sop.assetId === selectedAsset?.id);
 
   return (
-    <div className="min-h-screen bg-[#f7f7f7] flex flex-col font-sans text-[#3f4142]">
+    <div className="h-screen overflow-hidden bg-[#f7f7f7] flex flex-col font-sans text-[#3f4142]">
       <Header onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         {/* Sidebar - Asset Registry. Only show if we are NOT viewing a document */}
         {!currentSop && (
           <Sidebar
@@ -128,7 +128,7 @@ export default function App() {
 
         {/* Main Content Area */}
         <main className={`flex-1 overflow-y-auto scroll-smooth ${!currentSop ? 'p-4 md:p-8' : 'p-0'}`}>
-          <div className={`${!currentSop ? 'max-w-6xl mx-auto' : 'w-full'} h-full flex flex-col`}>
+          <div className={`${!currentSop ? 'max-w-6xl mx-auto' : 'w-full'} min-h-full flex flex-col`}>
             
             {!selectedAsset ? (
               // Empty State
@@ -148,7 +148,7 @@ export default function App() {
               <SopDisplay sop={currentSop} onBack={() => setCurrentSop(null)} />
             ) : (
               // Asset Dashboard View
-              <div className="flex flex-col gap-8 animate-fade-in">
+              <div className="flex flex-col gap-8 animate-fade-in pb-12">
                 
                 {/* Asset Header Card */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">

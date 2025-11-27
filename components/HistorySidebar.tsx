@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Search, Plus, Box, X, Briefcase } from 'lucide-react';
 import { Asset } from '../types';
@@ -32,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      {/* Mobile backdrop */}
+      {/* Mobile backdrop - z-40 is below Header (z-50) */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-[#3f4142]/50 z-40 md:hidden"
@@ -40,10 +39,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
         />
       )}
 
+      {/* 
+        Sidebar Positioning:
+        - Mobile: fixed, starts below header (top-16), z-40
+        - Desktop: relative, z-0, flows naturally 
+      */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-80 bg-white border-r border-gray-200 transform transition-transform duration-200 ease-in-out flex flex-col no-print
+        fixed left-0 w-80 bg-white border-r border-gray-200 transform transition-transform duration-200 ease-in-out flex flex-col no-print
+        top-16 bottom-0 z-40
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        md:relative md:translate-x-0 md:h-[calc(100vh-64px)]
+        md:relative md:translate-x-0 md:top-0 md:h-full md:z-0
       `}>
         {/* Sidebar Header */}
         <div className="p-4 border-b border-gray-100">

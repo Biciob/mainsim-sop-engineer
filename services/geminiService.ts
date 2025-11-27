@@ -46,15 +46,18 @@ Genera sempre una singola SOP completa nel formato markdown.
 
 export const generateSopContent = async (request: SopGenerationRequest): Promise<string> => {
   try {
+    // VITE CHANGE: Use import.meta.env.VITE_API_KEY instead of process.env.API_KEY
     const apiKey = import.meta.env.VITE_API_KEY;
+    
     if (!apiKey) {
-      throw new Error("API Key not found in environment variables");
+      throw new Error("API Key not found in environment variables. Check VITE_API_KEY.");
     }
 
     const ai = new GoogleGenAI({ apiKey });
     
     // Construct a rich prompt based on inputs
     let constructedPrompt = `Genera una SOP tecnica dettagliata basata sui seguenti dati:\n\n`;
+    constructedPrompt += `TIPO DOCUMENTO: ${request.docType || 'Standard Procedure'}\n`;
     constructedPrompt += `DESCRIZIONE ATTIVITÀ: ${request.description}\n`;
     if (request.brand) constructedPrompt += `MARCA ASSET: ${request.brand}\n`;
     if (request.model) constructedPrompt += `MODELLO ASSET: ${request.model}\n`;
