@@ -1,0 +1,5 @@
+{
+  "name": "SOP Engineer AI",
+  "description": "An intelligent assistant dedicated to generating professional Standard Operating Procedures (SOPs) for maintenance, facility management, and operations using Google Gemini.",
+  "requestFramePermissions": []
+}
